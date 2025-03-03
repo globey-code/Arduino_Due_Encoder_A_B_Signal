@@ -32,6 +32,7 @@ Arduino_Due_Encoder_A_B_Signal/
 ├── lib/                  # (Optional) Custom libraries (currently empty)
 ├── .gitignore            # Git ignored files
 ├── platformio.ini        # PlatformIO configuration file
+├── detect_arduino_due.ps1 # PowerShell script to auto-detect Arduino Due
 └── README.md             # This file
 ```
 
@@ -58,12 +59,21 @@ cd Arduino_Due_Encoder_A_B_Signal
 - Open the project folder.
 - Ensure the **PlatformIO extension** is installed.
 
-### 3. Compile and Upload
+### 3. Auto-Detect Arduino Due Upload Port
+Before uploading, run the following **PowerShell script** to automatically detect the correct COM port:
+
+```powershell
+.\detect_arduino_due.ps1
+```
+
+- If an **Arduino Due is detected**, the script will update `platformio.ini` with the correct upload port.
+- If **no Arduino Due is found**, it will display an error message in **red**.
+
+### 4. Compile and Upload
 - **Build the project** using PlatformIO’s build command.
-- **Connect your Arduino Due** via the **Programming Port**.
 - **Upload the firmware** using PlatformIO’s upload command.
 
-### 4. Monitor Serial Output
+### 5. Monitor Serial Output
 ```bash
 pio device monitor --baud 115200
 ```
