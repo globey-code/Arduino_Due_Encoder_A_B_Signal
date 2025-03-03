@@ -33,6 +33,7 @@ Arduino_Due_Encoder_A_B_Signal/
 ├── .gitignore            # Git ignored files
 ├── platformio.ini        # PlatformIO configuration file
 ├── detect_arduino_due.ps1 # PowerShell script to auto-detect Arduino Due
+├── git_push_all.ps1      # PowerShell script to push all Git changes
 └── README.md             # This file
 ```
 
@@ -78,6 +79,24 @@ Before uploading, run the following **PowerShell script** to automatically detec
 pio device monitor --baud 115200
 ```
 This will display encoder readings and calculated values.
+
+### 6. Push Changes to GitHub Automatically
+To quickly **push all changes to GitHub**, use the included **PowerShell script**:
+
+```powershell
+.\git_push_all.ps1
+```
+
+- The script **detects the current project folder** and ensures it's a valid Git repository.
+- It **stages all changes** (new, modified, and deleted files).
+- It **prompts you for a commit message**.
+- It **pushes the changes to GitHub**.
+
+If the push fails due to remote updates, first run:
+```powershell
+git pull origin main --rebase
+```
+and then retry pushing.
 
 ## Usage Example
 
