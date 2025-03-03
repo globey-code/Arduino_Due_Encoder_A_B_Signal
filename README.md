@@ -2,77 +2,93 @@
 
 ## Project Overview
 
-This project provides a structured approach to measuring and analyzing rotary encoder signals using an Arduino Due microcontroller. It captures A/B phase signals from an incremental encoder to determine rotational direction, calculate pulse frequency, and derive key motion parameters such as revolutions per minute (RPM) and linear speed. The project leverages PlatformIO for streamlined development, compilation, and deployment.
+This project is designed to process rotary encoder signals using an **Arduino Due**. It reads **A/B phase signals** from an incremental encoder to determine rotational direction, frequency, and RPM, while also calculating chain speed. The project is developed with **PlatformIO** for streamlined development, building, and debugging.
 
-## Key Features
+## Features
 
 - **Encoder Signal Processing:**
-  - Captures quadrature encoder signals to determine rotation direction.
-  - Computes real-time frequency (Hz) and RPM based on pulse count.
-  - Calculates linear speed in both inches per minute and feet per minute based on encoder resolution and mechanical parameters.
+  - Captures A/B signals from the encoder.
+  - Determines rotational **direction** (forward/reverse).
+  - Calculates **frequency (Hz), RPM, and chain speed**.
 
-- **Modular Code Architecture:**
-  - Implements a structured software design by separating declarations, interrupt service routines, and computational logic into dedicated header and source files.
-  - Facilitates code readability, maintainability, and scalability.
+- **Modular Code Structure:**
+  - `include/encoder.h` → Contains function declarations.
+  - `src/encoder.cpp` → Implements encoder processing logic.
+  - `src/main.cpp` → Main application loop.
 
 - **PlatformIO Integration:**
-  - Employs PlatformIO for automated project configuration, dependency management, and firmware deployment.
-  - Supports efficient debugging and serial data monitoring.
+  - Simplifies compilation, flashing, and serial monitoring.
+  - Ensures structured development workflow.
 
-## Project Directory Structure
+## Project Structure
 
 ```
 Arduino_Due_Encoder_A_B_Signal/
 ├── include/
-│   └── encoder.h         # Header file containing function declarations and macros
+│   └── encoder.h         # Encoder function declarations
 ├── src/
-│   ├── encoder.cpp       # Source file implementing encoder ISR and data processing
-│   └── main.cpp          # Main program logic
+│   ├── encoder.cpp       # Encoder ISR and logic
+│   └── main.cpp          # Main program
+├── lib/                  # (Optional) Custom libraries (currently empty)
+├── .gitignore            # Git ignored files
 ├── platformio.ini        # PlatformIO configuration file
-└── README.md             # Project documentation
+└── README.md             # This file
 ```
 
-## System Requirements
+## Requirements
 
-- **Hardware Components:**
-  - Arduino Due microcontroller
-  - Incremental rotary encoder with A/B phase output
-  - Required wiring and power supply
+- **Hardware:**
+  - Arduino Due board
+  - Incremental rotary encoder with A/B signals
 
-- **Software Environment:**
-  - [PlatformIO](https://platformio.org/) (recommended with Visual Studio Code)
-  - Arduino framework and associated libraries (managed by PlatformIO)
+- **Software:**
+  - [PlatformIO](https://platformio.org/) (recommended in Visual Studio Code)
+  - Arduino framework libraries (managed by PlatformIO)
 
 ## Getting Started
 
 ### 1. Clone the Repository
-
-Execute the following command in a terminal:
-
 ```bash
 git clone https://github.com/yourusername/Arduino_Due_Encoder_A_B_Signal.git
 cd Arduino_Due_Encoder_A_B_Signal
 ```
 
-### 2. Open the Project in PlatformIO
+### 2. Open in PlatformIO
+- Launch **VS Code**.
+- Open the project folder.
+- Ensure the **PlatformIO extension** is installed.
 
-- Launch Visual Studio Code and open the cloned project folder.
-- Ensure the PlatformIO extension is installed and active.
-
-### 3. Compile and Upload Firmware
-
-- Use the PlatformIO build command to compile the source code.
-- Connect the Arduino Due via the **Programming Port**.
-- Upload the firmware using PlatformIO’s upload command.
+### 3. Compile and Upload
+- **Build the project** using PlatformIO’s build command.
+- **Connect your Arduino Due** via the **Programming Port**.
+- **Upload the firmware** using PlatformIO’s upload command.
 
 ### 4. Monitor Serial Output
+```bash
+pio device monitor --baud 115200
+```
+This will display encoder readings and calculated values.
 
-- Open the PlatformIO Serial Monitor with a baud rate of **115200** to observe encoder readings and computed parameters in real-time.
+## Usage Example
 
-## Licensing
+Modify `main.cpp` to read encoder values:
 
-This project is distributed under the [MIT License](LICENSE).
+```cpp
+#include "encoder.h"
+
+void setup() {
+    Serial.begin(115200);
+    // Initialize encoder
+}
+
+void loop() {
+    // Read encoder values and process them
+}
+```
+
+## License
+This project is licensed under the [MIT License](LICENSE).
 
 ---
 
-Contributions and modifications are welcome to improve functionality and optimize performance.
+For any modifications or additional features, feel free to contribute!
